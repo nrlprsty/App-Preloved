@@ -2,4 +2,124 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ================================================
+         PALET UTAMA — Preloved App
+         Diambil langsung dari CSS Figma
+    ================================================ -->
+
+    <!-- WARNA PRIMER -->
+    <color name="colorPrimary">#D4664D</color>
+    <!-- Dipakai: bg Login-1, Register-1, Logout-1, Kelola Profil-1 (sidebar gelap) -->
+
+    <color name="colorSecondary">#DF8F7C</color>
+    <!-- Dipakai: topbar, tombol utama, border input field di halaman cerah -->
+
+    <color name="colorBackground">#FAEEEB</color>
+    <!-- Dipakai: bg Login-2/3, Register-2/3, Logout-2, Kelola Profil-2/3/4 -->
+
+    <!-- SURFACE & CARD -->
+    <color name="colorSurface">#FAEEEB</color>
+    <!-- Background halaman dalam app -->
+
+    <color name="colorCart">#F5E6D3</color>
+    <!-- Kartu keranjang, kartu ilustrasi, avatar background -->
+
+    <!-- TOMBOL DI HALAMAN GELAP (Login-1, Register-1) -->
+    <color name="btnDarkBg">#F5E6D3</color>
+    <!-- Background tombol "Login" & "Daftar Sekarang" di halaman gelap -->
+
+    <color name="btnDarkText">#D4664D</color>
+    <!-- Teks tombol di halaman gelap -->
+
+    <!-- TOMBOL DI HALAMAN CERAH (Login-2/3, Register-2, Kelola Profil, dll) -->
+    <color name="btnLightBg">#DF8F7C</color>
+    <!-- Background tombol "Login", "Daftar", "Simpan", "Batal", "Ya" -->
+
+    <color name="btnLightText">#FFFFFF</color>
+    <!-- Teks tombol di halaman cerah -->
+
+    <!-- TEKS -->
+    <color name="textPrimary">#D4664D</color>
+    <!-- Judul halaman cerah, teks "Produk", label field -->
+
+    <color name="textOnDark">#FFFFFF</color>
+    <!-- Teks di atas background gelap (#D4664D): nama menu sidebar, judul -->
+
+    <color name="textLabel">#DF8F7C</color>
+    <!-- Label input field (Nama Lengkap, Email, Nomor Telepon, Alamat) -->
+
+    <color name="textInput">#000000</color>
+    <!-- Isi teks di dalam input field -->
+
+    <color name="textBody">#000000</color>
+    <!-- Teks paragraf biasa (deskripsi produk, keterangan akun) -->
+
+    <!-- ICON -->
+    <color name="iconOnDark">#FAEEEB</color>
+    <!-- Ikon di atas background gelap (sidebar, menu hamburger) -->
+
+    <color name="iconOnLight">#DF8F7C</color>
+    <!-- Ikon search, ikon di input field di halaman cerah -->
+
+    <!-- INPUT FIELD -->
+    <color name="inputBorder">#DF8F7C</color>
+    <!-- Border semua input field (stroke 2.5dp - 4dp) -->
+
+    <color name="inputBackground">#FAEEEB</color>
+    <!-- Background input field -->
+
+    <!-- TOPBAR / TOOLBAR -->
+    <color name="colorTopbar">#DF8F7C</color>
+    <!-- Topbar di Register-2, Kelola Profil-2/3/4 -->
+
+    <color name="colorTopbarText">#FFFFFF</color>
+    <!-- Teks & ikon di topbar -->
+
+    <!-- BOTTOM NAVIGATION -->
+    <color name="colorBottomNav">#DF8F7C</color>
+    <!-- Background bottom navigation bar (Login-4) -->
+
+    <color name="colorBottomNavIcon">#FAEEEB</color>
+    <!-- Ikon di bottom navigation -->
+
+    <!-- DIVIDER / GARIS PEMISAH -->
+    <color name="colorDividerDark">#F5E6D3</color>
+    <!-- Garis pemisah di halaman gelap (border: 4px solid #F5E6D3) -->
+
+    <color name="colorDividerLight">#DF8F7C</color>
+    <!-- Garis pemisah di halaman cerah (border: 4px solid #DF8F7C) -->
+
+    <!-- DIALOG LOGOUT -->
+    <color name="colorDialogBorder">#D4664D</color>
+    <!-- Border kotak dialog konfirmasi logout -->
+
+    <!-- STATUS PRODUK -->
+    <color name="colorAvailable">#90C98B</color>
+    <!-- Label "Available" pada kartu produk -->
+
+
+    <!--  Warna Utama Aplikasi (Terracotta)  -->
+    <color name="primary">#C8614A</color>
+    <color name="primary_dark">#A8503B</color>
+    <color name="primary_light">#D07560</color>
+    <color name="avatar_bg">#EFE0D5</color>
+    <color name="background_light">#FAF0EB</color>
+    <color name="divider_color">#DDBBAC</color>
+    <!--  Warna Teks  -->
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#B08070</color>
+    <!--  FIX ERROR: Warna-warna baru untuk Input Field & Outline Button  -->
+    <color name="transparent">#00000000</color>
+    <!--  Transparan / Bening  -->
+    <color name="input_background">#FFFFFF</color>
+    <!--  Latar belakang input (Putih)  -->
+    <color name="input_stroke">#C8614A</color>
+    <!--  Garis pinggir saat diklik (Terracotta)  -->
+    <color name="input_stroke_normal">#DDBBAC</color>
+    <!--  Garis pinggir biasa (Krem Gelap)  -->
+    <color name="error">#E53935</color>
+    <!--  Warna merah untuk error  -->
+
+
 </resources>

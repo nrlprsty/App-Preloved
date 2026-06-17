@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <!--  Registrasi Berhasil → Fraunces Black 32sp  -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fraunces_black"
+        android:text="Registrasi Berhasil!"
+        android:textColor="@color/textPrimary"
+        android:textSize="32sp" />
+    <!--  Deskripsi → DM Sans Regular 16sp  -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/dmsans_regular"
+        android:text="Akun Anda sudah aktif dan siap digunakan. Silakan login untuk mulai menggunakan aplikasi Preloved."
+        android:textAlignment="center"
+        android:textColor="@color/textBody"
+        android:textSize="16sp" />
+    <!--  Tombol Login Sekarang → DM Sans Bold 24sp  -->
+    <Button
+        android:id="@+id/btnLoginSekarang"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/btnLightBg"
+        android:fontFamily="@font/dmsans_bold"
+        android:text="Login Sekarang"
+        android:textAllCaps="false"
+        android:textColor="@color/btnLightText"
+        android:textSize="16sp" />
+</LinearLayout>
