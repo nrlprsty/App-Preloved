@@ -2,6 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_main">#FAEEEB</color>
+    <color name="primary">#DF8F7C</color>
+    <color name="logo_color">#F5E6D3</color>
 
     <!-- ================================================
          PALET UTAMA — Preloved App
@@ -100,7 +103,7 @@
 
 
     <!--  Warna Utama Aplikasi (Terracotta)  -->
-    <color name="primary">#C8614A</color>
+    <color name="primary1">#C8614A</color>
     <color name="primary_dark">#A8503B</color>
     <color name="primary_light">#D07560</color>
     <color name="avatar_bg">#EFE0D5</color>

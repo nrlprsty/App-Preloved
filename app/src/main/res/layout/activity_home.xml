@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    >
+
+    <!-- HEADER (tidak ikut scroll) -->
+
+    <!-- KONTEN YANG BISA DI-SCROLL -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTopbar"
+        android:orientation="vertical"
+        android:paddingStart="6dp"
+        android:paddingTop="40dp"
+        android:paddingEnd="1dp"
+        android:paddingBottom="14dp"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/btnDashboard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="9dp"
+                android:src="@drawable/ic_hamburger"
+                app:tint="@color/colorTopbarText"
+                tools:ignore="DuplicateIds" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:fontFamily="@font/fraunces_bold"
+                android:text="Selamat datang,"
+                android:textColor="@color/colorTopbarText"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNamaUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/fraunces_bold"
+            android:text="User"
+            android:textColor="@color/colorTopbarText"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/search_box"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/colorSecondary" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/fraunces_regular"
+                android:gravity="center_vertical"
+                android:hint="Cari produk preloved..."
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHint="@color/textLabel"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- JUDUL SECTION -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:fontFamily="@font/fraunces_bold"
+                android:text="Produk"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp" />
+
+            <!-- GRID PRODUK — pakai GridLayout tanpa layout_weight -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:padding="8dp">
+
+                <!-- ITEM 1 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Dress Putih"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 35.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />
+
+                </LinearLayout>
+
+                <!-- ITEM 2 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Ballet Shoes"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 250.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />
+
+                </LinearLayout>
+
+                <!-- ITEM 3 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Tas Rajut"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 75.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />
+
+                </LinearLayout>
+
+                <!-- ITEM 4 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Blouse Floral"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 45.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />
+
+                </LinearLayout>
+
+                <!-- ITEM 5 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Cardigan Krem"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 90.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />
+
+                </LinearLayout>
+
+                <!-- ITEM 6 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rok Mini"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 55.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />\
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rok Mini"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 55.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />\
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="155dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="105dp"
+                        android:background="@color/colorSecondary"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rok Mini"
+                        android:textColor="@color/textBody"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:fontFamily="@font/fraunces_bold"
+                        android:text="Rp 55.000"
+                        android:textSize="12sp"
+                        android:textColor="@color/textLabel" />\
+
+                </LinearLayout>
+
+
+            </GridLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- BOTTOM NAVIGATION (tidak ikut scroll) -->
+    <!-- BOTTOM NAVIGATION -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorBottomNav"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- icon 1 -->
+        <ImageView
+            android:id="@+id/btnDashboard"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_dialog_email"
+            app:tint="@color/colorBottomNavIcon"
+            tools:ignore="DuplicateIds" />
+
+        <!-- icon 2 -->
+        <ImageView
+            android:id="@+id/btnTambah"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_input_add"
+            app:tint="@color/colorBottomNavIcon" />
+
+        <!-- icon 3 -->
+        <ImageView
+            android:id="@+id/btnProfil"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_agenda"
+            app:tint="@color/colorBottomNavIcon"/>
+
+        <!-- icon 4 -->
+        <ImageView
+            android:id="@+id/btnLogout"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_person"
+            app:tint="@color/colorBottomNavIcon"/>
+
+    </LinearLayout>
+
+</LinearLayout>
