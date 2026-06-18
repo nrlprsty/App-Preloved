@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin   = findViewById(R.id.btnLogin);
         btnBack    = findViewById(R.id.btnBack);
+        tvDaftar   = findViewById(R.id.tvDaftar);
 
         // Tombol Back → kembali ke activity sebelumnya
         btnBack.setOnClickListener(v -> finish());
