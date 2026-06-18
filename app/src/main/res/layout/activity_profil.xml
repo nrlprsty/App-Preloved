@@ -50,7 +50,7 @@
     </RelativeLayout>
 
     <!-- Banner sukses (awalnya GONE, muncul setelah simpan) -->
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/banner_sukses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,21 +67,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="✓"
-            android:textColor="#C8614A"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-            android:gravity="center"/>
+            android:fontFamily="@font/fraunces_regular"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Profil berhasil diperbarui"
-            android:textColor="#C8614A"
+            android:textColor="@color/colorPrimary"
             android:textSize="13sp"
-            android:gravity="center"
             android:fontFamily="@font/fraunces_regular"/>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -110,11 +109,12 @@
                         android:background="@drawable/circle_avatar_bg"
                         android:contentDescription="Avatar" />
                     <TextView
+                        android:id="@+id/tv_avatar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="U"
-                        android:textColor="#C8614A"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="32sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/fraunces_regular"/>
@@ -126,10 +126,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="User"
-                    android:textColor="#C8614A"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/fraunces_bold"/>
+                    android:fontFamily="@font/fraunces_regular"/>
 
                 <View
                     android:layout_width="100dp"
@@ -147,39 +147,39 @@
                 android:paddingEnd="20dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Nama Lengkap" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
+                    android:text="Nama Lengkap" android:textColor="@color/textLabel" android:textSize="14sp" android:fontFamily="@font/fraunces_regular"/>
                 <TextView android:id="@+id/tv_nama"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginTop="4dp" android:text="User"
                     android:background="@drawable/bg_field_readonly"
-                    android:padding="10dp" android:textSize="14sp" android:textColor="#333333" android:fontFamily="@font/fraunces_regular"/>
+                    android:padding="10dp" android:textSize="14sp" android:textColor="@color/textBody" android:fontFamily="@font/fraunces_regular"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Nomor Telepon" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
+                    android:text="Nomor Telepon" android:textColor="@color/textLabel" android:textSize="14sp" android:fontFamily="@font/fraunces_regular"/>
                 <TextView android:id="@+id/tv_telepon"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginTop="4dp" android:text="+62 1234567890"
                     android:background="@drawable/bg_field_readonly"
-                    android:padding="10dp" android:textSize="14sp" android:textColor="#333333" android:fontFamily="@font/fraunces_regular"/>
+                    android:padding="10dp" android:textSize="14sp" android:textColor="@color/textBody" android:fontFamily="@font/fraunces_regular"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Alamat" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
+                    android:text="Alamat" android:textColor="@color/textLabel" android:textSize="14sp" android:fontFamily="@font/fraunces_regular"/>
                 <TextView android:id="@+id/tv_alamat"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginTop="4dp" android:text="Jl. Merak 123"
                     android:background="@drawable/bg_field_readonly"
-                    android:padding="10dp" android:textSize="14sp" android:textColor="#333333" android:fontFamily="@font/fraunces_regular"/>
+                    android:padding="10dp" android:textSize="14sp" android:textColor="@color/textBody" android:fontFamily="@font/fraunces_regular"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Email" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
+                    android:text="Email" android:textColor="@color/textLabel" android:textSize="14sp" android:fontFamily="@font/fraunces_regular"/>
                 <TextView android:id="@+id/tv_email"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginTop="4dp" android:text="user@gmail.com"
                     android:background="@drawable/bg_field_readonly"
-                    android:padding="10dp" android:textSize="14sp" android:textColor="#333333" android:fontFamily="@font/fraunces_regular" />
+                    android:padding="10dp" android:textSize="14sp" android:textColor="@color/textBody" android:fontFamily="@font/fraunces_regular"/>
 
             </LinearLayout>
         </LinearLayout>
