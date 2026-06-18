@@ -106,7 +106,19 @@
                     android:layout_marginTop="4dp" android:hint="Nama Lengkap"
                     android:background="@drawable/bg_field_edit"
                     android:padding="10dp" android:textSize="14sp"
+                    android:textColor="@color/textInput"
+                    android:textColorHint="@color/textLabel"
                     android:inputType="textPersonName" android:fontFamily="@font/fraunces_regular"/>
+                <TextView
+                    android:id="@+id/err_nama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/error"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/fraunces_regular"/>
+
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
@@ -116,7 +128,19 @@
                     android:layout_marginTop="4dp" android:hint="+62"
                     android:background="@drawable/bg_field_edit"
                     android:padding="10dp" android:textSize="14sp"
+                    android:textColor="@color/textInput"
+                    android:textColorHint="@color/textLabel"
                     android:inputType="phone" android:fontFamily="@font/fraunces_regular"/>
+                <TextView
+                    android:id="@+id/err_telepon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/error"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/fraunces_regular"/>
+
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
@@ -126,7 +150,18 @@
                     android:layout_marginTop="4dp" android:hint="Alamat"
                     android:background="@drawable/bg_field_edit"
                     android:padding="10dp" android:textSize="14sp"
+                    android:textColor="@color/textInput"
+                    android:textColorHint="@color/textLabel"
                     android:inputType="textPostalAddress" android:fontFamily="@font/fraunces_regular"/>
+                <TextView
+                    android:id="@+id/err_alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/error"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/fraunces_regular"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
@@ -136,7 +171,18 @@
                     android:layout_marginTop="4dp" android:hint="Email"
                     android:background="@drawable/bg_field_edit"
                     android:padding="10dp" android:textSize="14sp"
+                    android:textColor="@color/textInput"
+                    android:textColorHint="@color/textLabel"
                     android:inputType="textEmailAddress" android:fontFamily="@font/fraunces_regular"/>
+                <TextView
+                    android:id="@+id/err_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/error"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/fraunces_regular"/>
 
                 <!-- Tombol Simpan -->
                 <androidx.appcompat.widget.AppCompatButton
