@@ -66,17 +66,17 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             // Validasi kredensial
-           /* if (email.equals(VALID_EMAIL) && password.equals(VALID_PASSWORD)) {
-                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();*/
+            if (email.equals(VALID_EMAIL) && password.equals(VALID_PASSWORD)) {
+                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
 
                 // Pindah ke HomeActivity (buat activity ini jika belum ada)
                 Intent intent = new Intent(LoginActivity.this, com.example.app_preloved.HomeActivity.class);
                 intent.putExtra("email", email); // kirim data email ke halaman berikutnya
                 startActivity(intent);
                 finish(); // tutup LoginActivity agar tidak bisa back ke sini
-           /* } else {
+           } else {
                 Toast.makeText(this, "Email atau password salah!", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         });
     }
 }
