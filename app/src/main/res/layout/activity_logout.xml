@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogoutActivity">
+    android:background="#FAEEEB">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="175dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_box"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginBottom="25dp"
+            android:gravity="center"
+            android:text="Keluar dari akun?"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/fraunces_bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBatal"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#DF8F7C"
+                android:text="Batal"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/fraunces_bold"/>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:id="@+id/btnYa"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#DF8F7C"
+                android:text="Ya"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/fraunces_bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
