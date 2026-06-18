@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     // Kredensial dummy untuk validasi
     private static final String VALID_EMAIL = "user@email.com";
     private static final String VALID_PASSWORD = "12345";
+
+    private TextView tvDaftar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,6 +49,12 @@ public class LoginActivity extends AppCompatActivity {
 
         // Tombol Back → kembali ke activity sebelumnya
         btnBack.setOnClickListener(v -> finish());
+
+        // Teks "Daftar disini" → ke RegisterActivity
+        tvDaftar.setOnClickListener(v -> { // ← TAMBAH INI
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
 
         // Tombol Login → validasi input
         btnLogin.setOnClickListener(v -> {
