@@ -1,24 +1,43 @@
 package com.example.app_preloved;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class DashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        // Icon ☰ kanan atas → tutup Dashboard, kembali ke Home
+        findViewById(R.id.btn_close).setOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.slide_out_left, R.anim.stay);
         });
+
+        // Menu Home → kembali ke Home
+        findViewById(R.id.menu_home).setOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.slide_out_left, R.anim.stay);
+        });
+
+        // Menu Profil → buka ProfilActivity
+        findViewById(R.id.menu_profil).setOnClickListener(v -> {
+            startActivity(new Intent(this, ProfilActivity.class));
+        });
+
+        // Menu Pengaturan
+        findViewById(R.id.menu_pengaturan).setOnClickListener(v -> {
+            // TODO: startActivity ke PengaturanActivity
+        });
+
+        // Menu Logout
+        findViewById(R.id.menu_logout).setOnClickListener(v -> {
+            startActivity(new Intent(this, LogoutActivity.class));
+        });
+
+
     }
 }

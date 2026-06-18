@@ -1,10 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    android:orientation="vertical"
+    android:background="#D4664D"
+    android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Icon ☰ di kanan atas (sesuai Figma) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_hamburger"
+            android:contentDescription="Tutup"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+
+    <!-- Avatar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/circle_avatar_bg"
+                android:contentDescription="Avatar" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="U"
+                android:textColor="@color/colorPrimary"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fraunces_bold"/>
+        </FrameLayout>
+
+        <!-- Garis pemisah -->
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorDividerDark" />
+
+        <!-- Judul Dashboard -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Dashboard"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/fraunces_bold"/>
+    </LinearLayout>
+
+    <!-- Menu Items -->
+
+    <!-- Home -->
+    <LinearLayout
+        android:id="@+id/menu_home"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_home"
+            android:contentDescription="Home" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/fraunces_bold"/>
+    </LinearLayout>
+
+    <!-- Profil -->
+    <LinearLayout
+        android:id="@+id/menu_profil"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_person"
+            android:contentDescription="Profil" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Profil"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/fraunces_bold"/>
+    </LinearLayout>
+
+    <!-- Pengaturan -->
+    <LinearLayout
+        android:id="@+id/menu_pengaturan"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="Pengaturan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Pengaturan"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/fraunces_bold"/>
+    </LinearLayout>
+
+    <!-- Logout -->
+    <LinearLayout
+        android:id="@+id/menu_logout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_logout"
+            android:contentDescription="Logout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/fraunces_bold"/>
+    </LinearLayout>
+
+</LinearLayout>
