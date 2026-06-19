@@ -10,189 +10,170 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
+
     EditText etNama, etEmail, etHp, etPassword, etKonfirmasi;
     TextView errorNama, errorEmail, errorHp, errorPassword, errorKonfirmasi;
     Button btnDaftar;
-    ImageView btnBack;
+    ImageView btnBack, btnTogglePassword, btnToggleKonfirmasi;
     TextView txtMasuk;
-
-    ImageView btnTogglePassword, btnToggleKonfirmasi;
     boolean isPasswordVisible = false;
     boolean isKonfirmasiVisible = false;
+
+    FirebaseAuth mAuth;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        // EditText
+
+        mAuth = FirebaseAuth.getInstance();
+        db    = FirebaseFirestore.getInstance();
+
         etNama       = findViewById(R.id.etNama);
         etEmail      = findViewById(R.id.etEmail);
         etHp         = findViewById(R.id.etHp);
         etPassword   = findViewById(R.id.etPassword);
         etKonfirmasi = findViewById(R.id.etKonfirmasi);
 
-        // Error TextView
         errorNama       = findViewById(R.id.errorNama);
         errorEmail      = findViewById(R.id.errorEmail);
         errorHp         = findViewById(R.id.errorHp);
         errorPassword   = findViewById(R.id.errorPassword);
         errorKonfirmasi = findViewById(R.id.errorKonfirmasi);
 
-        btnTogglePassword = findViewById(R.id.btnTogglePassword);
+        btnTogglePassword   = findViewById(R.id.btnTogglePassword);
         btnToggleKonfirmasi = findViewById(R.id.btnToggleKonfirmasi);
 
         btnTogglePassword.setOnClickListener(v -> {
             if (isPasswordVisible) {
-                // Sembunyikan password
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                btnTogglePassword.setImageResource(R.drawable.ic_eye);
                 isPasswordVisible = false;
             } else {
-                // Tampilkan password
                 etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                btnTogglePassword.setImageResource(R.drawable.ic_eye);
                 isPasswordVisible = true;
             }
-            // Jaga cursor tetap di akhir
             etPassword.setSelection(etPassword.getText().length());
         });
 
         btnToggleKonfirmasi.setOnClickListener(v -> {
             if (isKonfirmasiVisible) {
                 etKonfirmasi.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                btnToggleKonfirmasi.setImageResource(R.drawable.ic_eye);
                 isKonfirmasiVisible = false;
             } else {
                 etKonfirmasi.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                btnToggleKonfirmasi.setImageResource(R.drawable.ic_eye);
                 isKonfirmasiVisible = true;
             }
             etKonfirmasi.setSelection(etKonfirmasi.getText().length());
         });
 
         btnDaftar = findViewById(R.id.btnDaftar);
-        btnDaftar.setOnClickListener(v -> {
-            validasiForm();
-        });
+        btnDaftar.setOnClickListener(v -> validasiForm());
 
         btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {finish();});
+        btnBack.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
 
         txtMasuk = findViewById(R.id.txtMasuk);
         txtMasuk.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, LoginActivity.class));
         });
     }
 
     private void validasiForm() {
-
-        String nama = etNama.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String hp = etHp.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+        String nama       = etNama.getText().toString().trim();
+        String email      = etEmail.getText().toString().trim();
+        String hp         = etHp.getText().toString().trim();
+        String password   = etPassword.getText().toString().trim();
         String konfirmasi = etKonfirmasi.getText().toString().trim();
 
-        // Nama kosong
-        if(TextUtils.isEmpty(nama)){
+        if (TextUtils.isEmpty(nama)) {
             errorNama.setText("Nama wajib diisi");
             errorNama.setVisibility(View.VISIBLE);
-            etNama.requestFocus();
             return;
-        }else{
-            errorNama.setVisibility(View.GONE);
-        }
+        } else { errorNama.setVisibility(View.GONE); }
 
-        // Email kosong
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             errorEmail.setText("Email wajib diisi");
             errorEmail.setVisibility(View.VISIBLE);
-            etEmail.requestFocus();
             return;
         }
-
-        // Format email
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             errorEmail.setText("Format email tidak valid");
             errorEmail.setVisibility(View.VISIBLE);
-            etEmail.requestFocus();
             return;
-        }else{
-            errorEmail.setVisibility(View.GONE);
-        }
+        } else { errorEmail.setVisibility(View.GONE); }
 
-        // Email sudah terdaftar
-        String emailTerdaftar = "admin@gmail.com";
-
-        if(email.equalsIgnoreCase(emailTerdaftar)){
-            errorEmail.setText("Email ini sudah terdaftar");
-            errorEmail.setVisibility(View.VISIBLE);
-            etEmail.requestFocus();
-
-            // Proses registrasi dibatalkan
-            return;
-        }else{
-            errorEmail.setVisibility(View.GONE);
-        }
-
-        // HP kosong
-        if(TextUtils.isEmpty(hp)){
+        if (TextUtils.isEmpty(hp)) {
             errorHp.setText("Nomor HP wajib diisi");
             errorHp.setVisibility(View.VISIBLE);
-            etHp.requestFocus();
             return;
-        }else{
-            errorHp.setVisibility(View.GONE);
-        }
+        } else { errorHp.setVisibility(View.GONE); }
 
-        // Password kosong
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             errorPassword.setText("Password wajib diisi");
             errorPassword.setVisibility(View.VISIBLE);
-            etPassword.requestFocus();
             return;
         }
-
-
-        // Minimal 6 karakter
-        if(password.length() < 6){
+        if (password.length() < 6) {
             errorPassword.setText("Password minimal 6 karakter");
             errorPassword.setVisibility(View.VISIBLE);
-            etPassword.requestFocus();
             return;
-        }else{
-            errorPassword.setVisibility(View.GONE);
-        }
+        } else { errorPassword.setVisibility(View.GONE); }
 
-        // Konfirmasi password
-        if(!password.equals(konfirmasi)){
+        if (!password.equals(konfirmasi)) {
             errorKonfirmasi.setText("Password tidak sama");
             errorKonfirmasi.setVisibility(View.VISIBLE);
-            etKonfirmasi.requestFocus();
             return;
-        }else{
-            errorKonfirmasi.setVisibility(View.GONE);
-        }
+        } else { errorKonfirmasi.setVisibility(View.GONE); }
 
-        Toast.makeText(this,
-                 "Registrasi Berhasil",
-              Toast.LENGTH_SHORT).show();
+        // Semua valid → daftar ke Firebase
+        btnDaftar.setEnabled(false);
+        btnDaftar.setText("Mendaftar...");
 
-        Intent intent =
-                new Intent(RegisterActivity.this,
-                        SuccessActivity.class);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    // Simpan data profil ke Firestore
+                    String uid = authResult.getUser().getUid();
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("nama",    nama);
+                    user.put("email",   email);
+                    user.put("telepon", hp);
+                    user.put("alamat",  "");
 
-        startActivity(intent);
+                    db.collection("users").document(uid)
+                            .set(user)
+                            .addOnSuccessListener(unused -> {
+                                startActivity(new Intent(this, SuccessActivity.class));
+                                finish();
+                            })
+                            .addOnFailureListener(e -> {
+                                btnDaftar.setEnabled(true);
+                                btnDaftar.setText("Daftar");
+                                Toast.makeText(this,
+                                        "Gagal simpan profil: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    btnDaftar.setEnabled(true);
+                    btnDaftar.setText("Daftar");
+                    errorEmail.setText("Pendaftaran gagal: " + e.getMessage());
+                    errorEmail.setVisibility(View.VISIBLE);
+                });
     }
 }

@@ -3,22 +3,30 @@ package com.example.app_preloved;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfilActivity extends AppCompatActivity {
 
     TextView tvNama, tvTelepon, tvAlamat, tvEmail, tvNamaHeader, tvAvatar;
-    /*LinearLayout bannerSukses;*/
-
     static final int REQUEST_EDIT = 1;
+
+    FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        mAuth = FirebaseAuth.getInstance();
+        db    = FirebaseFirestore.getInstance();
+        uid   = mAuth.getCurrentUser().getUid();
 
         tvNama       = findViewById(R.id.tv_nama);
         tvTelepon    = findViewById(R.id.tv_telepon);
@@ -26,9 +34,9 @@ public class ProfilActivity extends AppCompatActivity {
         tvEmail      = findViewById(R.id.tv_email);
         tvNamaHeader = findViewById(R.id.tv_nama_header);
         tvAvatar     = findViewById(R.id.tv_avatar);
-        /*bannerSukses = findViewById(R.id.banner_sukses);*/
 
-        updateAvatar(tvNama.getText().toString());
+        // Ambil data dari Firestore
+        ambilDataProfil();
 
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
@@ -40,6 +48,26 @@ public class ProfilActivity extends AppCompatActivity {
             editIntent.putExtra("email",   tvEmail.getText().toString());
             startActivityForResult(editIntent, REQUEST_EDIT);
         });
+    }
+
+    private void ambilDataProfil() {
+        db.collection("users").document(uid)
+                .get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        String nama    = document.getString("nama");
+                        String telepon = document.getString("telepon");
+                        String alamat  = document.getString("alamat");
+                        String email   = document.getString("email");
+
+                        tvNama.setText(nama);
+                        tvTelepon.setText(telepon);
+                        tvAlamat.setText(alamat);
+                        tvEmail.setText(email);
+                        tvNamaHeader.setText(nama);
+                        updateAvatar(nama);
+                    }
+                });
     }
 
     private void updateAvatar(String nama) {
@@ -58,39 +86,22 @@ public class ProfilActivity extends AppCompatActivity {
             tvTelepon.setText(data.getStringExtra("telepon"));
             tvAlamat.setText(data.getStringExtra("alamat"));
             tvEmail.setText(data.getStringExtra("email"));
-            tvNamaHeader.setText(data.getStringExtra("nama"));
-
+            tvNamaHeader.setText(namaBaru);
             updateAvatar(namaBaru);
 
-            /*// Tampilkan banner sukses
-            bannerSukses.setVisibility(View.VISIBLE);
-            // Sembunyikan otomatis setelah 3 detik
-            new android.os.Handler().postDelayed(() -> {
-                bannerSukses.setVisibility(View.INVISIBLE);
-            }, 1500);*/
-
-            // Tampilkan popup sukses di tengah
             android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(this)
                     .setView(getLayoutInflater().inflate(R.layout.dialog_sukses, null))
                     .setCancelable(false)
                     .create();
-
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-            // Posisi di tengah atas
             dialog.getWindow().setGravity(android.view.Gravity.TOP | android.view.Gravity.CENTER_HORIZONTAL);
-            dialog.getWindow().getAttributes().y = 150; // jarak dari atas
-
+            dialog.getWindow().getAttributes().y = 150;
             dialog.show();
-            // Paksa ukuran dialog sesuai konten
             dialog.getWindow().setLayout(
                     android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
                     android.view.ViewGroup.LayoutParams.WRAP_CONTENT
             );
-
-            new android.os.Handler().postDelayed(() -> {
-                dialog.dismiss();
-            }, 2000);
+            new android.os.Handler().postDelayed(dialog::dismiss, 2000);
         }
     }
 }

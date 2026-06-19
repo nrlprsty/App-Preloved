@@ -206,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_field_edit"
                     android:fontFamily="@font/fraunces_regular"
-                    android:hint="Minimal 8 karakter"
+                    android:hint="Minimal 6 karakter"
                     android:inputType="textPassword"
                     android:paddingStart="36dp"
                     android:paddingEnd="10dp"

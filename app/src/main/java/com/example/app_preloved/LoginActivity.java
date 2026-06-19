@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,19 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
     private Button btnLogin;
     private ImageView btnBack;
-
-    // Kredensial dummy untuk validasi
-    private static final String VALID_EMAIL = "user@email.com";
-    private static final String VALID_PASSWORD = "12345";
-
     private TextView tvDaftar;
+    private FirebaseAuth mAuth;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,28 +39,28 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inisialisasi View
+        mAuth = FirebaseAuth.getInstance();
+
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin   = findViewById(R.id.btnLogin);
         btnBack    = findViewById(R.id.btnBack);
         tvDaftar   = findViewById(R.id.tvDaftar);
 
-        // Tombol Back → kembali ke activity sebelumnya
+        // Tombol Back
         btnBack.setOnClickListener(v -> finish());
 
         // Teks "Daftar disini" → ke RegisterActivity
-        tvDaftar.setOnClickListener(v -> { // ← TAMBAH INI
+        tvDaftar.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
-        // Tombol Login → validasi input
+        // Tombol Login → Firebase Auth
         btnLogin.setOnClickListener(v -> {
             String email    = etUsername.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
-            // Cek field kosong
             if (TextUtils.isEmpty(email)) {
                 etUsername.setError("Email tidak boleh kosong");
                 etUsername.requestFocus();
@@ -75,18 +73,23 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Validasi kredensial
-            if (email.equals(VALID_EMAIL) && password.equals(VALID_PASSWORD)) {
-                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+            btnLogin.setEnabled(false);
+            btnLogin.setText("Masuk...");
 
-                // Pindah ke HomeActivity (buat activity ini jika belum ada)
-                Intent intent = new Intent(LoginActivity.this, com.example.app_preloved.HomeActivity.class);
-                intent.putExtra("email", email); // kirim data email ke halaman berikutnya
-                startActivity(intent);
-                finish(); // tutup LoginActivity agar tidak bisa back ke sini
-           } else {
-                Toast.makeText(this, "Email atau password salah!", Toast.LENGTH_SHORT).show();
-            }
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(authResult -> {
+                        Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .addOnFailureListener(e -> {
+                        btnLogin.setEnabled(true);
+                        btnLogin.setText("Masuk");
+                        Toast.makeText(this,
+                                "Email atau password salah!",
+                                Toast.LENGTH_SHORT).show();
+                    });
         });
     }
 }

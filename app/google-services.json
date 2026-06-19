@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1009901303056",
+    "project_id": "app-preloved",
+    "storage_bucket": "app-preloved.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009901303056:android:a270916ecbf1530794a195",
+        "android_client_info": {
+          "package_name": "com.example.app_preloved"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-t_xc0QIiOnGBclEzEkkQtdHhXWLp8N0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,10 +13,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
+
 public class EditProfilActivity extends AppCompatActivity {
 
     EditText etNama, etTelepon, etAlamat, etEmail;
     TextView errNama, errTelepon, errAlamat, errEmail;
+    TextView tvNamaAvatar, tvAvatarEdit;
     Button btnSimpan, btnBatal;
 
     @Override
@@ -34,17 +40,14 @@ public class EditProfilActivity extends AppCompatActivity {
         errAlamat  = findViewById(R.id.err_alamat);
         errEmail   = findViewById(R.id.err_email);
 
+        tvNamaAvatar = findViewById(R.id.tv_nama_avatar);
+        tvAvatarEdit  = findViewById(R.id.tv_avatar_edit);
+
         btnSimpan = findViewById(R.id.btn_simpan);
         btnBatal  = findViewById(R.id.btn_batal);
 
-        // Isi field dengan data sebelumnya
-        Intent intent = getIntent();
-        etNama.setText(intent.getStringExtra("nama"));
-        etTelepon.setText(intent.getStringExtra("telepon"));
-        etAlamat.setText(intent.getStringExtra("alamat"));
-        etEmail.setText(intent.getStringExtra("email"));
+        loadDataFromFirestore();
 
-        // Hapus error saat user mulai mengetik
         etNama.addTextChangedListener(new SimpleTextWatcher(() -> errNama.setVisibility(View.GONE)));
         etTelepon.addTextChangedListener(new SimpleTextWatcher(() -> errTelepon.setVisibility(View.GONE)));
         etAlamat.addTextChangedListener(new SimpleTextWatcher(() -> errAlamat.setVisibility(View.GONE)));
@@ -61,6 +64,36 @@ public class EditProfilActivity extends AppCompatActivity {
         });
     }
 
+    private void loadDataFromFirestore() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() == null) return;
+
+        String uid = mAuth.getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        String nama = doc.getString("nama");
+                        etNama.setText(nama);
+                        etTelepon.setText(doc.getString("telepon"));
+                        etAlamat.setText(doc.getString("alamat"));
+                        etEmail.setText(doc.getString("email"));
+
+                        tvNamaAvatar.setText(nama);
+
+                        if (nama != null && !nama.isEmpty()) {
+                            tvAvatarEdit.setText(String.valueOf(nama.charAt(0)).toUpperCase());
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    android.util.Log.e("DEBUG_PROFIL", "Gagal ambil data", e);
+                });
+    }
+
     private boolean validasiInput() {
         boolean valid = true;
 
@@ -69,7 +102,6 @@ public class EditProfilActivity extends AppCompatActivity {
         String alamat  = etAlamat.getText().toString().trim();
         String email   = etEmail.getText().toString().trim();
 
-        // Validasi Nama
         if (TextUtils.isEmpty(nama)) {
             errNama.setText("Nama lengkap tidak boleh kosong");
             errNama.setVisibility(View.VISIBLE);
@@ -80,7 +112,6 @@ public class EditProfilActivity extends AppCompatActivity {
             valid = false;
         }
 
-        // Validasi Telepon
         if (TextUtils.isEmpty(telepon)) {
             errTelepon.setText("Nomor telepon tidak boleh kosong");
             errTelepon.setVisibility(View.VISIBLE);
@@ -95,14 +126,12 @@ public class EditProfilActivity extends AppCompatActivity {
             valid = false;
         }
 
-        // Validasi Alamat
         if (TextUtils.isEmpty(alamat)) {
             errAlamat.setText("Alamat tidak boleh kosong");
             errAlamat.setVisibility(View.VISIBLE);
             valid = false;
         }
 
-        // Validasi Email
         if (TextUtils.isEmpty(email)) {
             errEmail.setText("Email tidak boleh kosong");
             errEmail.setVisibility(View.VISIBLE);
@@ -117,29 +146,49 @@ public class EditProfilActivity extends AppCompatActivity {
     }
 
     private void simpanData() {
-        // Simulasi E1 - Kegagalan Sistem (misal random gagal)
-        boolean sistemGagal = false; // ganti true untuk test error
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        if (sistemGagal) {
-            // E1 – Tampilkan dialog kegagalan sistem
-            new AlertDialog.Builder(this)
-                    .setTitle("Gagal Menyimpan")
-                    .setMessage("Terjadi kesalahan sistem. Data tidak diperbarui. Silakan coba kembali.")
-                    .setPositiveButton("Coba Lagi", (dialog, which) -> dialog.dismiss())
-                    .setNegativeButton("Batal", (dialog, which) -> finish())
-                    .setCancelable(false)
-                    .show();
+        if (mAuth.getCurrentUser() == null) {
             return;
         }
 
-        // Sukses → kirim data ke ProfilActivity
-        Intent result = new Intent(this, ProfilActivity.class);
-        result.putExtra("profil_diperbarui", true);
-        result.putExtra("nama",    etNama.getText().toString().trim());
-        result.putExtra("telepon", etTelepon.getText().toString().trim());
-        result.putExtra("alamat",  etAlamat.getText().toString().trim());
-        result.putExtra("email",   etEmail.getText().toString().trim());
-        setResult(Activity.RESULT_OK, result);
-        finish();
+        String uid = mAuth.getCurrentUser().getUid();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("nama", etNama.getText().toString().trim());
+        data.put("telepon", etTelepon.getText().toString().trim());
+        data.put("alamat", etAlamat.getText().toString().trim());
+        data.put("email", etEmail.getText().toString().trim());
+
+        btnSimpan.setEnabled(false);
+
+        db.collection("users")
+                .document(uid)
+                .set(data)
+                .addOnSuccessListener(unused -> {
+
+                    Intent result = new Intent();
+                    result.putExtra("profil_diperbarui", true);
+                    result.putExtra("nama", etNama.getText().toString().trim());
+                    result.putExtra("telepon", etTelepon.getText().toString().trim());
+                    result.putExtra("alamat", etAlamat.getText().toString().trim());
+                    result.putExtra("email", etEmail.getText().toString().trim());
+
+                    setResult(Activity.RESULT_OK, result);
+                    finish();
+                })
+
+                .addOnFailureListener(e -> {
+
+                    btnSimpan.setEnabled(true);
+
+                    new AlertDialog.Builder(this)
+                            .setTitle("Gagal Menyimpan")
+                            .setMessage(e.getMessage())
+                            .setPositiveButton("OK", null)
+                            .show();
+
+                });
     }
 }

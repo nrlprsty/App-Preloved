@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <!-- Topbar Edit Profil -->
     <RelativeLayout
@@ -21,19 +20,19 @@
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Kembali"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:src="@drawable/ic_arrow_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/fraunces_bold"
             android:text="Edit Profil"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/fraunces_bold"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
@@ -49,8 +48,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:paddingTop="24dp"
                 android:paddingBottom="16dp">
 
@@ -63,6 +62,7 @@
                         android:background="@drawable/circle_avatar_bg"
                         android:contentDescription="Avatar" />
                     <TextView
+                        android:id="@+id/tv_avatar_edit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -74,14 +74,15 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_nama_avatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:fontFamily="@font/fraunces_bold"
                     android:text="User"
                     android:textColor="#C8614A"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/fraunces_bold"/>
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="100dp"
@@ -99,90 +100,138 @@
                 android:paddingEnd="20dp"
                 android:paddingBottom="24dp">
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Nama Lengkap *" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
-                <EditText android:id="@+id/et_nama"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:hint="Nama Lengkap"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:text="Nama Lengkap *"
+                    android:textColor="#B08070"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/bg_field_edit"
-                    android:padding="10dp" android:textSize="14sp"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:hint="Nama Lengkap"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
                     android:textColor="@color/textInput"
                     android:textColorHint="@color/textLabel"
-                    android:inputType="textPersonName" android:fontFamily="@font/fraunces_regular"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/err_nama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:fontFamily="@font/fraunces_regular"
                     android:textColor="@color/error"
                     android:textSize="11sp"
-                    android:visibility="gone"
-                    android:fontFamily="@font/fraunces_regular"/>
+                    android:visibility="gone" />
 
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Nomor Telepon *" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
-                <EditText android:id="@+id/et_telepon"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:hint="+62"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:text="Nomor Telepon *"
+                    android:textColor="#B08070"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/bg_field_edit"
-                    android:padding="10dp" android:textSize="14sp"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:hint="+62"
+                    android:inputType="phone"
+                    android:padding="10dp"
                     android:textColor="@color/textInput"
                     android:textColorHint="@color/textLabel"
-                    android:inputType="phone" android:fontFamily="@font/fraunces_regular"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/err_telepon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:fontFamily="@font/fraunces_regular"
                     android:textColor="@color/error"
                     android:textSize="11sp"
-                    android:visibility="gone"
-                    android:fontFamily="@font/fraunces_regular"/>
+                    android:visibility="gone" />
 
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Alamat *" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
-                <EditText android:id="@+id/et_alamat"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:hint="Alamat"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:text="Alamat *"
+                    android:textColor="#B08070"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/bg_field_edit"
-                    android:padding="10dp" android:textSize="14sp"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:hint="Alamat"
+                    android:inputType="textPostalAddress"
+                    android:padding="10dp"
                     android:textColor="@color/textInput"
                     android:textColorHint="@color/textLabel"
-                    android:inputType="textPostalAddress" android:fontFamily="@font/fraunces_regular"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/err_alamat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:fontFamily="@font/fraunces_regular"
                     android:textColor="@color/error"
                     android:textSize="11sp"
-                    android:visibility="gone"
-                    android:fontFamily="@font/fraunces_regular"/>
+                    android:visibility="gone" />
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Email *" android:textColor="#B08070" android:textSize="12sp" android:fontFamily="@font/fraunces_regular"/>
-                <EditText android:id="@+id/et_email"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:hint="Email"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:text="Email *"
+                    android:textColor="#B08070"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/bg_field_edit"
-                    android:padding="10dp" android:textSize="14sp"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
                     android:textColor="@color/textInput"
                     android:textColorHint="@color/textLabel"
-                    android:inputType="textEmailAddress" android:fontFamily="@font/fraunces_regular"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/err_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:fontFamily="@font/fraunces_regular"
                     android:textColor="@color/error"
                     android:textSize="11sp"
-                    android:visibility="gone"
-                    android:fontFamily="@font/fraunces_regular"/>
+                    android:visibility="gone" />
 
                 <!-- Tombol Simpan -->
                 <androidx.appcompat.widget.AppCompatButton
@@ -190,10 +239,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="24dp"
-                    android:text="Simpan"
-                    android:textColor="@color/btnLightText"
                     android:background="@drawable/bg_btn_primary"
-                    android:fontFamily="@font/fraunces_bold"/>
+                    android:fontFamily="@font/fraunces_bold"
+                    android:text="Simpan"
+                    android:textColor="@color/btnLightText" />
 
                 <!-- Tombol Batal -->
                 <androidx.appcompat.widget.AppCompatButton
@@ -201,10 +250,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="10dp"
-                    android:text="Batal"
-                    android:textColor="@color/btnLightText"
                     android:background="@drawable/bg_btn_primary"
-                    android:fontFamily="@font/fraunces_bold"/>
+                    android:fontFamily="@font/fraunces_bold"
+                    android:text="Batal"
+                    android:textColor="@color/btnLightText" />
 
             </LinearLayout>
         </LinearLayout>
