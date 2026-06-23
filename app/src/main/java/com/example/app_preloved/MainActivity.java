@@ -13,38 +13,39 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     Button btnDaftar, btnLogin;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
 
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
 
-        // Cek session SEBELUM setContentView
-        // supaya layout MainActivity tidak sempat tampil
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        // Cek apakah user sudah login
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if (currentUser != null) {
+            // Sudah login → langsung ke HomeActivity
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-            return; // stop di sini, tidak lanjut ke setContentView
+            return;
         }
-
-        // Kalau belum login, baru tampilkan halaman utama
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
 
         btnDaftar = findViewById(R.id.btnDaftar);
         btnLogin  = findViewById(R.id.btnLogin);
 
         btnDaftar.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
         btnLogin.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
     }
 }

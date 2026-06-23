@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
-    >
+    android:background="@color/colorBackground">
 
     <!-- HEADER (tidak ikut scroll) -->
-
-    <!-- KONTEN YANG BISA DI-SCROLL -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,8 +33,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="9dp"
                 android:src="@drawable/ic_hamburger"
-                app:tint="@color/colorTopbarText"
-                tools:ignore="DuplicateIds" />
+                app:tint="@color/colorTopbarText" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,6 +76,7 @@
                 app:tint="@color/colorSecondary" />
 
             <EditText
+                android:id="@+id/etCariProduk"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -98,329 +94,46 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <!-- KONTEN YANG BISA DI-SCROLL -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="@font/fraunces_bold"
+            android:text="Produk"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp" />
+
+        <!-- Empty state, tampil kalau belum ada produk sama sekali -->
+        <TextView
+            android:id="@+id/tvEmptyHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="Belum ada produk preloved.\nJadi yang pertama jualan!"
+            android:textColor="@color/textLabel"
+            android:textSize="14sp"
+            android:fontFamily="@font/fraunces_regular"
+            android:visibility="gone" />
 
-            <!-- JUDUL SECTION -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:fontFamily="@font/fraunces_bold"
-                android:text="Produk"
-                android:textColor="@color/textPrimary"
-                android:textSize="18sp" />
+        <!-- List produk dari Firestore, 2 kolom -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProdukHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:clipToPadding="false" />
 
-            <!-- GRID PRODUK — pakai GridLayout tanpa layout_weight -->
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:padding="8dp">
-
-                <!-- ITEM 1 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Dress Putih"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 35.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />
-
-                </LinearLayout>
-
-                <!-- ITEM 2 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Ballet Shoes"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 250.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />
-
-                </LinearLayout>
-
-                <!-- ITEM 3 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Tas Rajut"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 75.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />
-
-                </LinearLayout>
-
-                <!-- ITEM 4 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Blouse Floral"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 45.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />
-
-                </LinearLayout>
-
-                <!-- ITEM 5 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Cardigan Krem"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 90.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />
-
-                </LinearLayout>
-
-                <!-- ITEM 6 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rok Mini"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 55.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />\
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rok Mini"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 55.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />\
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:background="@color/colorSecondary"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rok Mini"
-                        android:textColor="@color/textBody"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:fontFamily="@font/fraunces_bold"
-                        android:text="Rp 55.000"
-                        android:textSize="12sp"
-                        android:textColor="@color/textLabel" />\
-
-                </LinearLayout>
-
-
-            </GridLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
     <!-- BOTTOM NAVIGATION (tidak ikut scroll) -->
-    <!-- BOTTOM NAVIGATION -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -458,7 +171,7 @@
 
         <!-- icon 4 -->
         <ImageView
-            android:id="@+id/btnProfil"
+            android:id="@+id/btnProduk"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_weight="1"

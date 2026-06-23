@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorBackground">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back_gelap"
+                android:contentDescription="Kembali" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Tambah produk"
+                android:fontFamily="@font/fraunces_bold"
+                android:textSize="17sp"
+                android:textColor="@color/textPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Upload Foto: kotak dashed -->
+            <LinearLayout
+                android:id="@+id/layoutFoto"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_input_dashed"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/ivPreviewFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/icTambahFoto"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:tint="@color/textLabel"
+                    xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+                <TextView
+                    android:id="@+id/tvTambahFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tambah foto produk"
+                    android:fontFamily="@font/fraunces_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/textLabel" />
+
+            </LinearLayout>
+
+            <!-- Nama Produk -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Nama produk"
+                android:fontFamily="@font/fraunces_regular"
+                android:textSize="13sp"
+                android:textColor="@color/textLabel" />
+            <EditText
+                android:id="@+id/etNamaProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Contoh: Dress putih"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/bg_field_edit"
+                android:textColor="@color/textInput"
+                android:textColorHint="@color/textLabel"
+                android:textSize="14sp"
+                android:fontFamily="@font/fraunces_regular" />
+
+            <!-- Deskripsi -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Deskripsi"
+                android:fontFamily="@font/fraunces_regular"
+                android:textSize="13sp"
+                android:textColor="@color/textLabel" />
+            <EditText
+                android:id="@+id/etDeskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Ceritakan kondisi barangnya..."
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:padding="12dp"
+                android:background="@drawable/bg_field_edit"
+                android:textColor="@color/textInput"
+                android:textColorHint="@color/textLabel"
+                android:textSize="14sp"
+                android:fontFamily="@font/fraunces_regular" />
+
+            <!-- Harga dan Kategori berdampingan -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="28dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="Harga"
+                        android:fontFamily="@font/fraunces_regular"
+                        android:textSize="13sp"
+                        android:textColor="@color/textLabel" />
+                    <EditText
+                        android:id="@+id/etHarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_field_edit"
+                        android:textColor="@color/textInput"
+                        android:textColorHint="@color/textLabel"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/fraunces_regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="Kategori"
+                        android:fontFamily="@font/fraunces_regular"
+                        android:textSize="13sp"
+                        android:textColor="@color/textLabel" />
+                    <Spinner
+                        android:id="@+id/spinnerKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_field_edit"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSimpan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Simpan produk"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/colorTopbar"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:fontFamily="@font/fraunces_bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tambahkan array ini ke strings.xml yang sudah ada, atau buat file baru arrays.xml -->
+    <string-array name="kategori_produk">
+        <item>Pilih Kategori</item>
+        <item>Pakaian</item>
+        <item>Sepatu</item>
+        <item>Tas</item>
+        <item>Aksesoris</item>
+        <item>Elektronik</item>
+        <item>Lainnya</item>
+    </string-array>
+</resources>
