@@ -34,7 +34,7 @@ public class EditProdukActivity extends AppCompatActivity {
 
     private EditText etNamaProduk, etHarga, etDeskripsi;
     private Spinner spinnerKategori;
-    private Button btnSimpan;
+    private Button btnSimpan, btnHapus;
     private ImageView btnBack, ivPreviewFoto;
     private LinearLayout layoutFoto;
     private ImageView icTambahFoto;
@@ -64,12 +64,12 @@ public class EditProdukActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // AP-14: inisialisasi view
         etNamaProduk    = findViewById(R.id.etNamaProduk);
         etHarga         = findViewById(R.id.etHarga);
         etDeskripsi     = findViewById(R.id.etDeskripsi);
         spinnerKategori = findViewById(R.id.spinnerKategori);
         btnSimpan       = findViewById(R.id.btnSimpan);
+        btnHapus        = findViewById(R.id.btnHapus);
         btnBack         = findViewById(R.id.btnBack);
         layoutFoto      = findViewById(R.id.layoutFoto);
         ivPreviewFoto   = findViewById(R.id.ivPreviewFoto);
@@ -96,7 +96,6 @@ public class EditProdukActivity extends AppCompatActivity {
             galleryLauncher.launch(intent);
         });
 
-        // AP-14: tombol simpan
         btnSimpan.setOnClickListener(v -> updateProduk());
 
 
@@ -127,8 +126,10 @@ public class EditProdukActivity extends AppCompatActivity {
                         Long harga = doc.getLong("harga");
                         etHarga.setText(harga != null ? String.valueOf(harga) : "");
                         etDeskripsi.setText(doc.getString("deskripsi"));
+
                         String kategori = doc.getString("kategori");
                         setSpinnerToValue(kategori);
+
                         fotoBase64Lama = doc.getString("foto");
                         tampilkanPreviewFotoLama();
                     } else {
@@ -147,7 +148,9 @@ public class EditProdukActivity extends AppCompatActivity {
         if (kategori == null) return;
         ArrayAdapter adapter = (ArrayAdapter) spinnerKategori.getAdapter();
         int position = adapter.getPosition(kategori);
-        if (position >= 0) spinnerKategori.setSelection(position);
+        if (position >= 0) {
+            spinnerKategori.setSelection(position);
+        }
     }
 
     // AP-14: tampilkan preview foto lama dari Base64
@@ -161,7 +164,7 @@ public class EditProdukActivity extends AppCompatActivity {
                 icTambahFoto.setVisibility(View.GONE);
                 tvTambahFoto.setVisibility(View.GONE);
             } catch (Exception e) {
-                // biarkan placeholder default
+                // Biarkan tampilan default placeholder foto jika gagal decode
             }
         }
     }
@@ -171,7 +174,11 @@ public class EditProdukActivity extends AppCompatActivity {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            if (bitmap == null) return null;
+
+            if (bitmap == null) {
+                return null;
+            }
+
             Bitmap resized = Bitmap.createScaledBitmap(bitmap, 400, 400, true);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.JPEG, 60, baos);
@@ -184,9 +191,9 @@ public class EditProdukActivity extends AppCompatActivity {
     // AP-14: validasi dan update data produk ke Firestore
     private void updateProduk() {
         String nama      = etNamaProduk.getText().toString().trim();
-        String hargaStr  = etHarga.getText().toString().trim();
-        String kategori  = spinnerKategori.getSelectedItem().toString();
-        String deskripsi = etDeskripsi.getText().toString().trim();
+        String hargaStr   = etHarga.getText().toString().trim();
+        String kategori   = spinnerKategori.getSelectedItem().toString();
+        String deskripsi  = etDeskripsi.getText().toString().trim();
 
         // AP-14: validasi nama
         if (TextUtils.isEmpty(nama)) {
@@ -223,12 +230,13 @@ public class EditProdukActivity extends AppCompatActivity {
 
         // AP-14: tentukan foto yang dipakai (baru atau lama)
         String fotoBase64Final;
+
         if (fotoUriBaru != null) {
             fotoBase64Final = uriToBase64(fotoUriBaru);
+
             if (fotoBase64Final == null) {
-                Toast.makeText(this,
-                        "Format foto tidak sesuai. Pilih foto lain.",
-                        Toast.LENGTH_LONG).show();
+                // A1 - Format File Tidak Sesuai (Story 6)
+                Toast.makeText(this, "Format foto tidak sesuai atau ukuran terlalu besar. Pilih foto lain.", Toast.LENGTH_LONG).show();
                 btnSimpan.setEnabled(true);
                 btnSimpan.setText("Simpan Perubahan");
                 return;
@@ -239,30 +247,30 @@ public class EditProdukActivity extends AppCompatActivity {
 
         // AP-14: data yang diupdate ke Firestore
         Map<String, Object> produk = new HashMap<>();
-        produk.put("nama",      nama);
-        produk.put("harga",     harga);
-        produk.put("kategori",  kategori);
+        produk.put("nama", nama);
+        produk.put("harga", harga);
+        produk.put("kategori", kategori);
         produk.put("deskripsi", deskripsi);
-        produk.put("foto",      fotoBase64Final);
+        produk.put("foto", fotoBase64Final);
 
         // AP-14: update ke Firestore
         db.collection("products")
                 .document(productId)
                 .update(produk)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this,
-                            "Produk berhasil diperbarui!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Produk berhasil diperbarui!", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
                 })
                 .addOnFailureListener(e -> {
+                    // E1 - Kegagalan Sistem
                     btnSimpan.setEnabled(true);
                     btnSimpan.setText("Simpan Perubahan");
+
                     new AlertDialog.Builder(this)
                             .setTitle("Gagal Memperbarui")
-                            .setMessage("Terjadi kesalahan sistem. Coba lagi.")
-                            .setPositiveButton("Coba Lagi", (d, w) -> d.dismiss())
+                            .setMessage("Terjadi kesalahan sistem. Data produk tidak diperbarui. Silakan coba kembali.")
+                            .setPositiveButton("Coba Lagi", (dialog, which) -> dialog.dismiss())
                             .setCancelable(false)
                             .show();
                 });
