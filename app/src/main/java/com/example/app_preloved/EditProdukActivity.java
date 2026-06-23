@@ -31,19 +31,13 @@ import java.util.Map;
 
 public class EditProdukActivity extends AppCompatActivity {
 
-    // AP-14: field form input
     private EditText etNamaProduk, etHarga, etDeskripsi;
     private Spinner spinnerKategori;
-    private Button btnSimpan;
+    private Button btnSimpan, btnHapus;
     private ImageView btnBack, ivPreviewFoto;
     private LinearLayout layoutFoto;
     private ImageView icTambahFoto;
     private TextView tvTambahFoto;
-
-
-    // AP-15: Hapus Produk — tambah tombol hapus
-
-    private Button btnHapus;
 
     private FirebaseFirestore db;
     private Uri fotoUriBaru = null;
@@ -68,20 +62,17 @@ public class EditProdukActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // AP-14: inisialisasi view
         etNamaProduk    = findViewById(R.id.etNamaProduk);
         etHarga         = findViewById(R.id.etHarga);
         etDeskripsi     = findViewById(R.id.etDeskripsi);
         spinnerKategori = findViewById(R.id.spinnerKategori);
         btnSimpan       = findViewById(R.id.btnSimpan);
+        btnHapus        = findViewById(R.id.btnHapus);
         btnBack         = findViewById(R.id.btnBack);
         layoutFoto      = findViewById(R.id.layoutFoto);
         ivPreviewFoto   = findViewById(R.id.ivPreviewFoto);
         icTambahFoto    = findViewById(R.id.icTambahFoto);
         tvTambahFoto    = findViewById(R.id.tvTambahFoto);
-
-        // AP-15: inisialisasi tombol hapus
-        btnHapus = findViewById(R.id.btnHapus);
 
         setupSpinnerKategori();
 
@@ -100,10 +91,7 @@ public class EditProdukActivity extends AppCompatActivity {
             galleryLauncher.launch(intent);
         });
 
-        // AP-14: tombol simpan
         btnSimpan.setOnClickListener(v -> updateProduk());
-
-        // AP-15: tombol hapus
         btnHapus.setOnClickListener(v -> konfirmasiHapus());
 
         loadDataProduk();
@@ -119,7 +107,7 @@ public class EditProdukActivity extends AppCompatActivity {
         spinnerKategori.setAdapter(adapter);
     }
 
-    // AP-14: ambil data produk dari Firestore
+    // Story 7, langkah 4: Sistem menampilkan data produk saat ini
     private void loadDataProduk() {
         db.collection("products")
                 .document(productId)
@@ -130,8 +118,10 @@ public class EditProdukActivity extends AppCompatActivity {
                         Long harga = doc.getLong("harga");
                         etHarga.setText(harga != null ? String.valueOf(harga) : "");
                         etDeskripsi.setText(doc.getString("deskripsi"));
+
                         String kategori = doc.getString("kategori");
                         setSpinnerToValue(kategori);
+
                         fotoBase64Lama = doc.getString("foto");
                         tampilkanPreviewFotoLama();
                     } else {
@@ -149,7 +139,9 @@ public class EditProdukActivity extends AppCompatActivity {
         if (kategori == null) return;
         ArrayAdapter adapter = (ArrayAdapter) spinnerKategori.getAdapter();
         int position = adapter.getPosition(kategori);
-        if (position >= 0) spinnerKategori.setSelection(position);
+        if (position >= 0) {
+            spinnerKategori.setSelection(position);
+        }
     }
 
     private void tampilkanPreviewFotoLama() {
@@ -162,16 +154,21 @@ public class EditProdukActivity extends AppCompatActivity {
                 icTambahFoto.setVisibility(View.GONE);
                 tvTambahFoto.setVisibility(View.GONE);
             } catch (Exception e) {
-                // biarkan placeholder default
+                // Biarkan tampilan default placeholder foto jika gagal decode
             }
         }
     }
 
+    // Story 6 (di-include): Unggah Foto Produk
     private String uriToBase64(Uri uri) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            if (bitmap == null) return null;
+
+            if (bitmap == null) {
+                return null;
+            }
+
             Bitmap resized = Bitmap.createScaledBitmap(bitmap, 400, 400, true);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.JPEG, 60, baos);
@@ -181,13 +178,14 @@ public class EditProdukActivity extends AppCompatActivity {
         }
     }
 
-    // AP-14: update data produk ke Firestore
+    // Story 7: Edit Produk
     private void updateProduk() {
         String nama      = etNamaProduk.getText().toString().trim();
-        String hargaStr  = etHarga.getText().toString().trim();
-        String kategori  = spinnerKategori.getSelectedItem().toString();
-        String deskripsi = etDeskripsi.getText().toString().trim();
+        String hargaStr   = etHarga.getText().toString().trim();
+        String kategori   = spinnerKategori.getSelectedItem().toString();
+        String deskripsi  = etDeskripsi.getText().toString().trim();
 
+        // A1 - Data Tidak Valid
         if (TextUtils.isEmpty(nama)) {
             etNamaProduk.setError("Nama produk wajib diisi");
             etNamaProduk.requestFocus();
@@ -216,12 +214,13 @@ public class EditProdukActivity extends AppCompatActivity {
         btnSimpan.setText("Menyimpan...");
 
         String fotoBase64Final;
+
         if (fotoUriBaru != null) {
             fotoBase64Final = uriToBase64(fotoUriBaru);
+
             if (fotoBase64Final == null) {
-                Toast.makeText(this,
-                        "Format foto tidak sesuai. Pilih foto lain.",
-                        Toast.LENGTH_LONG).show();
+                // A1 - Format File Tidak Sesuai (Story 6)
+                Toast.makeText(this, "Format foto tidak sesuai atau ukuran terlalu besar. Pilih foto lain.", Toast.LENGTH_LONG).show();
                 btnSimpan.setEnabled(true);
                 btnSimpan.setText("Simpan Perubahan");
                 return;
@@ -231,36 +230,35 @@ public class EditProdukActivity extends AppCompatActivity {
         }
 
         Map<String, Object> produk = new HashMap<>();
-        produk.put("nama",      nama);
-        produk.put("harga",     harga);
-        produk.put("kategori",  kategori);
+        produk.put("nama", nama);
+        produk.put("harga", harga);
+        produk.put("kategori", kategori);
         produk.put("deskripsi", deskripsi);
-        produk.put("foto",      fotoBase64Final);
+        produk.put("foto", fotoBase64Final);
 
         db.collection("products")
                 .document(productId)
                 .update(produk)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this,
-                            "Produk berhasil diperbarui!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Produk berhasil diperbarui!", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
                 })
                 .addOnFailureListener(e -> {
+                    // E1 - Kegagalan Sistem
                     btnSimpan.setEnabled(true);
                     btnSimpan.setText("Simpan Perubahan");
+
                     new AlertDialog.Builder(this)
                             .setTitle("Gagal Memperbarui")
-                            .setMessage("Terjadi kesalahan sistem. Coba lagi.")
-                            .setPositiveButton("Coba Lagi", (d, w) -> d.dismiss())
+                            .setMessage("Terjadi kesalahan sistem. Data produk tidak diperbarui. Silakan coba kembali.")
+                            .setPositiveButton("Coba Lagi", (dialog, which) -> dialog.dismiss())
                             .setCancelable(false)
                             .show();
                 });
     }
 
-
-    // AP-15: Hapus Produk — konfirmasi dan delete
+    // Story 8: Hapus Produk
     private void konfirmasiHapus() {
         new AlertDialog.Builder(this)
                 .setTitle("Hapus Produk")
@@ -270,7 +268,6 @@ public class EditProdukActivity extends AppCompatActivity {
                 .show();
     }
 
-    // AP-15: hapus produk dari Firestore
     private void hapusProduk() {
         btnHapus.setEnabled(false);
 
@@ -278,9 +275,7 @@ public class EditProdukActivity extends AppCompatActivity {
                 .document(productId)
                 .delete()
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this,
-                            "Produk berhasil dihapus",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Produk berhasil dihapus", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
                 })
@@ -288,8 +283,8 @@ public class EditProdukActivity extends AppCompatActivity {
                     btnHapus.setEnabled(true);
                     new AlertDialog.Builder(this)
                             .setTitle("Gagal Menghapus")
-                            .setMessage("Terjadi kesalahan sistem. Produk tidak terhapus. Coba lagi.")
-                            .setPositiveButton("Coba Lagi", (d, w) -> d.dismiss())
+                            .setMessage("Terjadi kesalahan sistem. Produk tidak terhapus. Silakan coba kembali.")
+                            .setPositiveButton("Coba Lagi", (dialog, which) -> dialog.dismiss())
                             .show();
                 });
     }
