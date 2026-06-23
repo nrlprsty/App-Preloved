@@ -84,9 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnDaftar.setOnClickListener(v -> validasiForm());
 
         btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {
-            startActivity(new Intent(this, LoginActivity.class));
-        });
+        btnBack.setOnClickListener(v -> {finish();});
 
         txtMasuk = findViewById(R.id.txtMasuk);
         txtMasuk.setOnClickListener(v -> {

@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ImageView btnLogout, btnDashboard;
+    private ImageView btnDashboard, btnChat, btnTambah, btnNotif, btnProfil;
     private TextView tvNamaUser;
 
     FirebaseAuth mAuth;
@@ -28,8 +28,12 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db    = FirebaseFirestore.getInstance();
 
-        btnLogout    = findViewById(R.id.btnLogout);
+        // Inisialisasi view
         btnDashboard = findViewById(R.id.btnDashboard);
+        btnChat      = findViewById(R.id.btnChat);
+        btnTambah    = findViewById(R.id.btnTambah);
+        btnNotif     = findViewById(R.id.btnNotif);
+        btnProfil    = findViewById(R.id.btnProfil);
         tvNamaUser   = findViewById(R.id.tvNamaUser);
 
         // Ambil nama dari Firestore
@@ -43,17 +47,35 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-        // Tombol Logout
-        btnLogout.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, LogoutActivity.class);
-            startActivity(intent);
-        });
-
-        // Tombol Dashboard
+        // Tombol Dashboard (hamburger menu)
         btnDashboard.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, DashboardActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.stay);
+        });
+
+        // Tombol Chat
+        btnChat.setOnClickListener(v -> {
+            // Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+            // startActivity(intent);
+        });
+
+        // Tombol Tambah Produk
+        btnTambah.setOnClickListener(v -> {
+            // Intent intent = new Intent(HomeActivity.this, TambahProdukActivity.class);
+            // startActivity(intent);
+        });
+
+        // Tombol Notifikasi
+        btnNotif.setOnClickListener(v -> {
+            // Intent intent = new Intent(HomeActivity.this, NotifikasiActivity.class);
+            // startActivity(intent);
+        });
+
+        // Tombol Profil
+        btnProfil.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ProfilActivity.class);
+            startActivity(intent);
         });
     }
 }

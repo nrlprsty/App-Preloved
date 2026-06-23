@@ -430,11 +430,11 @@
 
         <!-- icon 1 -->
         <ImageView
-            android:id="@+id/btnDashboard"
+            android:id="@+id/btnChat"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_dialog_email"
+            android:src="@drawable/ic_chat"
             app:tint="@color/colorBottomNavIcon"
             tools:ignore="DuplicateIds" />
 
@@ -449,20 +449,20 @@
 
         <!-- icon 3 -->
         <ImageView
-            android:id="@+id/btnProfil"
+            android:id="@+id/btnNotif"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_agenda"
+            android:src="@drawable/ic_notif"
             app:tint="@color/colorBottomNavIcon"/>
 
         <!-- icon 4 -->
         <ImageView
-            android:id="@+id/btnLogout"
+            android:id="@+id/btnProfil"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/ic_produk"
             app:tint="@color/colorBottomNavIcon"/>
 
     </LinearLayout>
