@@ -68,7 +68,7 @@
         android:drawableStart="@drawable/ic_person"
         android:drawableTint="#D07560"
         android:drawablePadding="10dp"
-        android:hint="username"
+        android:hint="email"
         android:textColorHint="#D07560"
         android:textColor="#D07560"
         android:paddingStart="15dp"/>
